@@ -8,7 +8,7 @@ import qrcode
 def qrGenerator(content,name):
     img = qrcode.make(content)
 
-    img.save('D:/Charan/pyprojects/'+ name + '.png')
+    img.save('D:/'+ name + '.png')
 
 def OTPsend(receiver, message):
 
@@ -72,7 +72,7 @@ def emailWithAttatchment(emailID,receiver):
     
     # open the file to be sent 
     filename = receiver + ".png"
-    attachment = open(r"D:/Charan/pyprojects/" + filename , "rb")
+    attachment = open(r"D:/" + filename , "rb")
     
     # instance of MIMEBase and named as p
     p = MIMEBase('application', 'octet-stream')
