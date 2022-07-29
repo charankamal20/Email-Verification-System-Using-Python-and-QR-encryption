@@ -141,7 +141,10 @@ while True:
             qrContent = """Your login credentials are: 
             Username: """ + emailID + """
             Password: """ + newPass + """
-            Thank You for Registring"""
+            Thank You for Registring
+            
+            Visit this link for project:
+            https://github.com/charankamal20/Email-Verification-System-Using-Python-and-QR-encryption.git """
 
             qrGenerator(qrContent, receiver)
 
@@ -173,7 +176,10 @@ while True:
             qrContent = """Your login credentials are: 
             Username: """ + emailIDstud + """
             Password: """ + newPass + """
-            Thank You for Registring"""
+            Thank You for Registring
+            
+            Visit this link for project:
+            https://github.com/charankamal20/Email-Verification-System-Using-Python-and-QR-encryption.git """
 
             qrGenerator(qrContent, receiver)
             
