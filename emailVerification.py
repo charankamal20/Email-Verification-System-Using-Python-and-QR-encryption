@@ -3,18 +3,12 @@ import math
 import random
 import smtplib
 import ssl
-import pyqrcode
-
+import qrcode
 
 def qrGenerator(content,name):
-    from pyqrcode import QRCode  
-    # String which represent the QR code 
-    s = content
-    # Generate QR code 
-    url = pyqrcode.create(s)  
-    nameofourfile = name + ".svg"  
-    # Create and save the png file naming "myqr.png"
-    url.svg(nameofourfile, scale = 8)
+    img = qrcode.make(content)
+
+    img.save('D:/Charan/pyprojects/'+ name + '.png')
 
 def OTPsend(receiver, message):
 
@@ -49,7 +43,7 @@ def OTPgen():
         OTP+=digits[math.floor(random.random()*10)]
     return OTP
 
-def emailWithAttatchment(emailID):
+def emailWithAttatchment(emailID,receiver):
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
     from email.mime.base import MIMEBase
@@ -77,8 +71,8 @@ def emailWithAttatchment(emailID):
     msg.attach(MIMEText(body, 'plain'))
     
     # open the file to be sent 
-    filename = "name.svg"
-    attachment = open(r"D:/Charan/pyprojects/name.svg", "rb")
+    filename = receiver + ".png"
+    attachment = open(r"D:/Charan/pyprojects/" + filename , "rb")
     
     # instance of MIMEBase and named as p
     p = MIMEBase('application', 'octet-stream')
@@ -143,12 +137,16 @@ while True:
             print("You are verified")
             print("\nYour login credentials are being encrypted......")
             newPass = OTPgen()
+
             qrContent = """Your login credentials are: 
             Username: """ + emailID + """
             Password: """ + newPass + """
             Thank You for Registring"""
 
             qrGenerator(qrContent, receiver)
+
+            emailWithAttatchment(emailID, receiver)
+            print("Check your email")
 
         else:
             print("Wrong OTP Entered\nTry again :(")
@@ -171,13 +169,15 @@ while True:
             print("You are verified")
             print("\nYour login credentials are being encrypted......")
             newPass = OTPgen()
+
             qrContent = """Your login credentials are: 
             Username: """ + emailIDstud + """
             Password: """ + newPass + """
             Thank You for Registring"""
 
             qrGenerator(qrContent, receiver)
-            emailWithAttatchment(emailIDstud)
+            
+            emailWithAttatchment(emailIDstud, receiver)
             print("Check your email")
 
         else:
