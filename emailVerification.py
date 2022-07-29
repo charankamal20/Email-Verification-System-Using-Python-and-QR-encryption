@@ -49,6 +49,68 @@ def OTPgen():
         OTP+=digits[math.floor(random.random()*10)]
     return OTP
 
+def emailWithAttatchment(emailID):
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+    from email.mime.base import MIMEBase
+    from email import encoders
+    
+    fromaddr = "co21314@ccet.ac.in"
+    toaddr = emailID
+    
+    # instance of MIMEMultipart
+    msg = MIMEMultipart()
+    
+    # storing the senders email address  
+    msg['From'] = fromaddr
+    
+    # storing the receivers email address 
+    msg['To'] = toaddr
+    
+    # storing the subject 
+    msg['Subject'] = "Your E-Mail credentials"
+    
+    # string to store the body of the mail
+    body = """Please Scan the QR code for your login credentials"""
+    
+    # attach the body with the msg instance
+    msg.attach(MIMEText(body, 'plain'))
+    
+    # open the file to be sent 
+    filename = "name.svg"
+    attachment = open(r"D:/Charan/pyprojects/name.svg", "rb")
+    
+    # instance of MIMEBase and named as p
+    p = MIMEBase('application', 'octet-stream')
+    
+    # To change the payload into encoded form
+    p.set_payload((attachment).read())
+    
+    # encode into base64
+    encoders.encode_base64(p)
+    
+    p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+    
+    # attach the instance 'p' to instance 'msg'
+    msg.attach(p)
+    
+    # creates SMTP session
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    
+    # start TLS for security
+    s.starttls()
+    
+    # Authentication
+    s.login(fromaddr, "Bazook@12506")
+    
+    # Converts the Multipart msg into a string
+    text = msg.as_string()
+    
+    # sending the mail
+    s.sendmail(fromaddr, toaddr, text)
+    
+    # terminating the session
+    s.quit()
 
 
 print("----Welcome to registration system----\n")
@@ -60,7 +122,7 @@ while True:
     print("\nAre you a: \n1. Teacher\n2. Student")
     choice = input("Your choice: ")
 
-    if choice == "1": ####teacher case
+    if choice == "1":       ####teacher case
         
         print("Enter the username of your email id(Example: username@ccet.ac.in)\n")
 
@@ -115,7 +177,8 @@ while True:
             Thank You for Registring"""
 
             qrGenerator(qrContent, receiver)
-
+            emailWithAttatchment(emailIDstud)
+            print("Check your email")
 
         else:
             print("Wrong OTP Entered\nTry again :(")
