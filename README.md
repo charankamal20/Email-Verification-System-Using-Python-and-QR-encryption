@@ -1,0 +1,2 @@
+# Email-Verification-System-Using-Python-and-QR-encryption
+This project is an email registration system dedicated to our college domain. Only teachers and college students can register through this system as the system only asks for username or Roll number for students and automatically sends an OTP on the user's email ID. Using that OTP the user can login and his or her new login credentials will be sent to the user on email in the form of a qr code.
