@@ -1,16 +1,17 @@
-import os
+#import os
 import math
 import random
 import smtplib
 import ssl
 import qrcode
 
-def qrGenerator(content,name):
-    img = qrcode.make(content)
+def qrGenerator(content,name):      ##### function to create qr code 
+
+    img = qrcode.make(content)      #this makes the qr code with the content we are passing as argument 
 
     img.save('D:/'+ name + '.png')
 
-def OTPsend(receiver, message):
+def OTPsend(receiver, message):     #Send OTP
 
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
@@ -29,28 +30,30 @@ def OTPsend(receiver, message):
         server.login(sender_email, password)
         
         server.sendmail(sender_email,receiver,message)
-        # TODO: Send email here
+        # TODO: Sending email here
     except Exception as e:
         # Print any error messages to stdout
         print(e)
     finally:
         server.quit() 
 
-def OTPgen():
-    digits="0123456789"
-    OTP=""
-    for i in range(6):
-        OTP+=digits[math.floor(random.random()*10)]
+def OTPgen():       #crweating a 6 digit OTP
+    x = 0
+    OTP = ""
+    while x < 6:
+        OTP+= str(random.randint(0, 9))         #creating a 6 digit otp 
+        x+=1
     return OTP
 
 def emailWithAttatchment(emailID,receiver):
+    
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
     from email.mime.base import MIMEBase
     from email import encoders
     
-    fromaddr = "co21314@ccet.ac.in"
-    toaddr = emailID
+    fromaddr = "co21314@ccet.ac.in"             #sender's address
+    toaddr = emailID                            #receiver's address
     
     # instance of MIMEMultipart
     msg = MIMEMultipart()
@@ -65,7 +68,9 @@ def emailWithAttatchment(emailID,receiver):
     msg['Subject'] = "Your E-Mail credentials"
     
     # string to store the body of the mail
-    body = """Please Scan the QR code for your login credentials"""
+    body = """You are registered in the database
+    
+    Please Scan the QR code for your login credentials"""
     
     # attach the body with the msg instance
     msg.attach(MIMEText(body, 'plain'))
@@ -150,6 +155,7 @@ while True:
 
             emailWithAttatchment(emailID, receiver)
             print("Check your email")
+            print("\n::Your login credentials have been sent to your email::")
 
         else:
             print("Wrong OTP Entered\nTry again :(")
@@ -185,6 +191,7 @@ while True:
             
             emailWithAttatchment(emailIDstud, receiver)
             print("Check your email")
+            print("\n::Your login credentials have been sent to your email::")
 
         else:
             print("Wrong OTP Entered\nTry again :(")
