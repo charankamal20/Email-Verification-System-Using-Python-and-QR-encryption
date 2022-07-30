@@ -15,9 +15,9 @@ def OTPsend(receiver, message):     #Send OTP
 
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
-    sender_email = "YourEmailID"
+    sender_email = "co21314@ccet.ac.in"
 
-    password = "YourPassword"
+    password = "Bazook@12506"
     # Create a secure SSL context
     context = ssl.create_default_context()
 
@@ -52,7 +52,7 @@ def emailWithAttatchment(emailID,receiver):
     from email.mime.base import MIMEBase
     from email import encoders
     
-    fromaddr = "Your email id"             #sender's address
+    fromaddr = "co21314@ccet.ac.in"             #sender's address
     toaddr = emailID                            #receiver's address
     
     # instance of MIMEMultipart
@@ -100,7 +100,7 @@ def emailWithAttatchment(emailID,receiver):
     s.starttls()
     
     # Authentication
-    s.login(fromaddr, "YourEmailpassword")
+    s.login(fromaddr, "Bazook@12506")
     
     # Converts the Multipart msg into a string
     text = msg.as_string()
