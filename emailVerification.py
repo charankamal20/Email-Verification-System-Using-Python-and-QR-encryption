@@ -52,7 +52,7 @@ def emailWithAttatchment(emailID,receiver):
     from email.mime.base import MIMEBase
     from email import encoders
     
-    fromaddr = "co21314@ccet.ac.in"             #sender's address
+    fromaddr = "your email address"             #sender's address
     toaddr = emailID                            #receiver's address
     
     # instance of MIMEMultipart
@@ -100,7 +100,7 @@ def emailWithAttatchment(emailID,receiver):
     s.starttls()
     
     # Authentication
-    s.login(fromaddr, "Bazook@12506")
+    s.login(fromaddr, "your email password")
     
     # Converts the Multipart msg into a string
     text = msg.as_string()
