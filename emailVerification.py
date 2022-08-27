@@ -15,9 +15,9 @@ def OTPsend(receiver, message):     #Send OTP
 
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
-    sender_email = "co21314@ccet.ac.in"
+    sender_email = "your email address"
 
-    password = "Bazook@12506"
+    password = "your email password"
     # Create a secure SSL context
     context = ssl.create_default_context()
 
